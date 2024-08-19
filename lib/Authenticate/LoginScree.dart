@@ -3,6 +3,7 @@ import 'package:chat_app2/Screens/HomeScreen.dart';
 import 'package:chat_app2/Authenticate/Methods.dart';
 import 'package:flutter/material.dart';
 
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -12,6 +13,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   bool isLoading = false;
+
+  bool _isObscure = true; 
 
   @override
   Widget build(BuildContext context) {
@@ -65,17 +68,59 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: size.height / 10,
             ),
+            // Container(
+            //   width: size.width,
+            //   alignment: Alignment.center,
+            //   child: field(size, "Email", Icons.account_box, _email),
+            // ),
             Container(
-              width: size.width,
-              alignment: Alignment.center,
-              child: field(size, "Email", Icons.account_box, _email),
+              width: size.width / 1.12,
+              child: Center(
+                child: TextField( 
+                  controller: _email,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    labelText: "Email", 
+                    prefixIcon: Icon(Icons.account_box, size:24),
+                            
+                  ),
+                ),
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 18.0),
-              child: Container(
-                width: size.width,
-                alignment: Alignment.center,
-                child: field(size, "Password", Icons.lock, _password),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(vertical: 18.0),
+            //   child: Container(
+            //     width: size.width,
+            //     alignment: Alignment.center,
+            //     child: field(size, "Password", Icons.lock, _password),
+            //   ),
+            // ),
+            Container(
+              padding: const EdgeInsets.all(25),
+              child: Center(
+                child: TextField( 
+                  controller: _password,
+                  obscureText: _isObscure,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    labelText: "Password", 
+                    prefixIcon: Icon(Icons.lock_rounded, size:24),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                    ),
+                  ),
+                ),
               ),
             ),
 
